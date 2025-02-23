@@ -1,6 +1,6 @@
-import { faArrowAltCircleLeft, faComment, faEye, faFileInvoiceDollar, faPenToSquare, faPrint, faScrewdriver, faScrewdriverWrench, faUser } from "@fortawesome/free-solid-svg-icons"
+import { faArrowAltCircleLeft, faScrewdriver, faScrewdriverWrench, faUser } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React, { useEffect, useState } from "react"
+import  { useEffect, useState } from "react"
 import { Button, Col, Container, Row } from "react-bootstrap"
 import { Link, useParams, useSearchParams } from "react-router"
 import { useAuth } from "../AuthContext"
@@ -10,6 +10,7 @@ import { Show } from "../utils/ConditionalRendering"
 import LoadingOverlay from "../components/LoadingOverlay"
 import { CustomerDocument } from "./AddJob"
 import JobTableCustomerPage from "../components/JobTableCustomerPage"
+import UpdateCustomerModal from "../components/UpdateCustomerModal"
 
 const CustomerDetails = () => {
     const { id } = useParams();
@@ -23,7 +24,7 @@ const CustomerDetails = () => {
 
     const fetchUrl = `${import.meta.env.VITE_API_URL}/api/customers/${id}`;
     
-    async function getJobDetails() {
+    async function getCustomerDetails() {
 
         setIsLoading(true);
 
@@ -47,7 +48,7 @@ const CustomerDetails = () => {
         // setTimeout(() => {
         //   getJobDetails();
         // }, 2000)
-        getJobDetails();
+        getCustomerDetails();
 
     }, []);
 
@@ -76,7 +77,7 @@ const CustomerDetails = () => {
           </Button>
         </Link>
         <div className="d-flex gap-2">
-          {/* {customerDetails && <UpdateOrderModal jobDetails={customerDetails} getJobDetails={getJobDetails}/>  } */}
+          {customerDetails && <UpdateCustomerModal customerDetails={customerDetails} getCustomerDetails={getCustomerDetails}/>  }
           
         </div>
       </div>

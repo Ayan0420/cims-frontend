@@ -3,7 +3,7 @@ import { JobDocument } from "../pages/Jobs";
 import { Show } from "../utils/ConditionalRendering";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faSearchMinus } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 interface JobOrderTableProps {
   jobs:JobDocument[]
@@ -33,7 +33,7 @@ const JobTableCustomerPage: React.FC<JobOrderTableProps> = ({jobs, isLoading}) =
         </Show>
         <Show when={jobs.length === 0 && !isLoading}>
           <tr>
-            <td colSpan={6} className="text-center fw-bold"><FontAwesomeIcon icon={faSearch} /> No jobs found</td>
+            <td colSpan={6} className="text-center fw-bold"><FontAwesomeIcon icon={faSearch} /> No jobs found! <Link to="/create-job" className="text-decoration-underline">Add New</Link></td>
           </tr>
         </Show>
         { jobs.map((job) => (

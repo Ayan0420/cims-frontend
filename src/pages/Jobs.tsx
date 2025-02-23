@@ -25,6 +25,7 @@ const Jobs = () => {
   const fetchUrl = `${import.meta.env.VITE_API_URL}/api/jobs`
 
   async function handleGetJobs(pg = "1", kw = "") {
+    setIsLoading(true)
     try {
       const response = await axios.get(`${fetchUrl}/?page=${pg}&keyword=${kw}`, {
         headers: {
@@ -57,7 +58,7 @@ const Jobs = () => {
   }
 
   useEffect(()=>{
-    setIsLoading(true)
+    
     handleGetJobs();
   },[])
 
@@ -120,7 +121,7 @@ const Jobs = () => {
         Job Orders
       </h1>
       <Link to="/create-job" className="btn btn-success btn-sm my-1">
-        <FontAwesomeIcon icon={faCirclePlus} className=''/> Add New
+        <FontAwesomeIcon icon={faCirclePlus} className=''/> Add New Job
       </Link>
     
       <Row>
@@ -173,7 +174,7 @@ const Jobs = () => {
       </Row>
       
       
-      <JobOrderTable jobs={jobs} isLoading={isLoading} />
+      <JobOrderTable jobs={jobs} isLoading={isLoading} handleGetJobs={handleGetJobs} />
 
     </Container>
   )

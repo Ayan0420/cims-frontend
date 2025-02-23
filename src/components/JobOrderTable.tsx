@@ -1,20 +1,43 @@
-import { Spinner, Table } from "react-bootstrap";
+import { Pagination, Spinner, Table } from "react-bootstrap";
 import { JobDocument } from "../pages/Jobs";
 import { Show } from "../utils/ConditionalRendering";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faSearchMinus } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight, faSearch, faSearchMinus } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 interface JobOrderTableProps {
   jobs:JobDocument[]
   isLoading: boolean
+  handleGetJobs: (pg:string, kw:string) => void
 }
 
-const JobOrderTable: React.FC<JobOrderTableProps> = ({jobs, isLoading}) => {
+const JobOrderTable: React.FC<JobOrderTableProps> = ({jobs, isLoading, handleGetJobs}) => {
 
   const navigate = useNavigate();
 
+  const [page, setPage] = useState(1);
+
+  function handleNextPage() {
+    setPage(prev => prev + 1)
+  }
+
+  function handlePrevPage() {
+    if(page <= 1) {
+      toast.error("You're at the first page.")
+    } else {
+      setPage(prev => prev - 1)
+    }
+  }
+
+  useEffect(() => {
+    console.log(page)
+    handleGetJobs(page.toString(), "")
+  }, [page])
+
   return (
+    <>
     <Table bordered responsive size="sm">
       <thead className="table-info">
         <tr className="text-center">
@@ -51,6 +74,20 @@ const JobOrderTable: React.FC<JobOrderTableProps> = ({jobs, isLoading}) => {
         ))}
       </tbody>
     </Table>
+    <Pagination size="sm" className="">
+        <Show when={page !== 1}>
+          <Pagination.Item linkClassName="text-dark" onClick={handlePrevPage}>
+            <FontAwesomeIcon icon={faArrowLeft} />
+          </Pagination.Item>
+        </Show>
+        <Pagination.Item linkClassName="text-dark">
+          Page {page}
+        </Pagination.Item>
+        <Pagination.Item linkClassName="text-dark" onClick={handleNextPage}>
+          <FontAwesomeIcon icon={faArrowRight} />
+        </Pagination.Item>
+      </Pagination>
+    </>
   );
 };
 

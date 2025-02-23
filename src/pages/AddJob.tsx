@@ -171,7 +171,7 @@ const AddJob = () => {
               }</Col>
               <Col>
                 <strong>Number of Jobs: </strong>
-                <Link to="" className='text-decoration-underline'>{selectedCustomer?.jobOrders.length}</Link>
+                <Link to={`/customers/${selectedCustomer?._id}`} className='text-decoration-underline'>{selectedCustomer?.jobOrders.length}</Link>
               </Col>
               
             </Row>

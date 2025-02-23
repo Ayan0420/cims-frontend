@@ -1,4 +1,5 @@
 import "bootswatch/dist/cerulean/bootstrap.min.css"
+// import "bootswatch/dist/flatly/bootstrap.min.css"
 import "./App.css"
 import { Navigate, Outlet } from "react-router"
 import Sidebar from "./components/Sidebar"

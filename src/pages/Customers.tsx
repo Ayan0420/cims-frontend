@@ -22,7 +22,8 @@ const Customers = () => {
 
   const fetchUrl = `${import.meta.env.VITE_API_URL}/api/customers`
 
-  async function handleGetJobs(pg = "1", kw = "") {
+  async function handleGetCustomer(pg = "1", kw = "") {
+    setIsLoading(true)
     try {
       const response = await axios.get(`${fetchUrl}/?page=${pg}&keyword=${kw}`, {
         headers: {
@@ -55,8 +56,8 @@ const Customers = () => {
   }
 
   useEffect(()=>{
-    setIsLoading(true)
-    handleGetJobs();
+    
+    handleGetCustomer();
   },[])
 
   // Handle search
@@ -67,14 +68,14 @@ const Customers = () => {
       // Set up a debounce timer
       const timer = setTimeout(() => {
         
-          handleGetJobs("",keyword)
+          handleGetCustomer("",keyword)
         
       }, 1000)
   
       return () => clearTimeout(timer)
     } else  {
       setIsLoading(true)
-      handleGetJobs();
+      handleGetCustomer();
     }
   }, [keyword])
 
@@ -111,7 +112,7 @@ const Customers = () => {
         </Col>
       </Row>
       
-      <CustomerTable customers={customers} isLoading={isLoading} />
+      <CustomerTable customers={customers} isLoading={isLoading} handleGetCustomer={handleGetCustomer} />
 
     </Container>
   )

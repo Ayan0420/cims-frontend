@@ -1,11 +1,10 @@
-
-
 import { Button, Image } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router';
 import { useAuth } from '../AuthContext';
 import toast from 'react-hot-toast';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChartLine, faGauge, faGears, faScrewdriverWrench, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faChartLine, faLaptopMedical, faGauge, faScrewdriverWrench, faUsers, faGears } from '@fortawesome/free-solid-svg-icons';
+
 
 const Sidebar = () => {
     const {logout} = useAuth();
@@ -19,8 +18,8 @@ const Sidebar = () => {
         <div className='bg-danger min-vh-100 py-3 d-flex flex-column sticky-top'>
             <Link to="/" className='text-decoration-none text-light pb-2 border-bottom border-light mb-3'>
                
-                <h1 className=' text-center fw-bolder font-monospace mb-0'>
-                    <FontAwesomeIcon icon={faGears} />CIMS
+                <h1 className=' text-center fw-bolder mb-0'>
+                    <FontAwesomeIcon icon={faLaptopMedical} /> CIMS
                 </h1>
             </Link>
             <div className='flex flex-column flex-grow-1 p-1 '>
@@ -36,6 +35,9 @@ const Sidebar = () => {
                 <Link className='sidebar-nav text-light mb-1 rounded-1 d-flex align-items-center gap-3' to='/' >
                     <FontAwesomeIcon icon={faChartLine} className='fs-4'/><span>Analytics</span>
                 </Link>
+                <a className='sidebar-nav text-light mb-1 rounded-1 d-flex align-items-center gap-3' target='_blank' href='./redirect-old-joms.html' >
+                    <FontAwesomeIcon icon={faGears} className='fs-4'/><span>Old System (Cloud ver.)</span>
+                </a>
                 
             </div>
             <div className='mt-auto text-center'>
