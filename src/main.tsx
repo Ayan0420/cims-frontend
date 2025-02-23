@@ -9,6 +9,9 @@ import { AuthProvider } from './AuthContext.tsx';
 import { Toaster } from 'react-hot-toast';
 import AddJob from './pages/AddJob.tsx';
 import JobDetails from './pages/JobDetails.tsx';
+import Customers from './pages/Customers.tsx';
+import AddCustomer from './pages/AddCustomer.tsx';
+import CustomerDetails from './pages/CustomerDetails.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -23,6 +26,9 @@ createRoot(document.getElementById('root')!).render(
           <Route path='/jobs' element={<Jobs />} />
           <Route path='/jobs/:id' element={<JobDetails />}/> 
           <Route path='/create-job' element={<AddJob />}/>
+          <Route path='/customers' element={<Customers />} />
+          <Route path='/customers/:id' element={<CustomerDetails />} />
+          <Route path='/create-customer' element={<AddCustomer />} />
         </Route>
         <Route path='/login' element={<Login />}/>
       </Routes>

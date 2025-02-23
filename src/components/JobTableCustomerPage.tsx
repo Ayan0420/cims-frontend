@@ -10,7 +10,7 @@ interface JobOrderTableProps {
   isLoading: boolean
 }
 
-const JobOrderTable: React.FC<JobOrderTableProps> = ({jobs, isLoading}) => {
+const JobTableCustomerPage: React.FC<JobOrderTableProps> = ({jobs, isLoading}) => {
 
   const navigate = useNavigate();
 
@@ -22,7 +22,6 @@ const JobOrderTable: React.FC<JobOrderTableProps> = ({jobs, isLoading}) => {
           <th>Work Performed</th>
           <th>Unit Model</th>
           <th>Status</th>
-          <th>Customer Name</th>
           <th>Date</th>
         </tr>
       </thead>
@@ -39,13 +38,12 @@ const JobOrderTable: React.FC<JobOrderTableProps> = ({jobs, isLoading}) => {
         </Show>
         { jobs.map((job) => (
           <tr key={job._id} className="text-center table-item" 
-            onClick={() => navigate(`/jobs/${job._id}`)}
+            onClick={() => navigate(`/jobs/${job._id}?prev=/customers/${job.customerId._id}`)}
           >
             <td>{job.jobOrderNum}</td>
             <td>{job.workPerformed}</td>
             <td>{job.unitModel}</td>
             <td>{job.sStatus}</td>
-            <td>{job.customerId.cusName}</td>
             <td>{job.jobDate}</td>
           </tr>
         ))}
@@ -54,4 +52,4 @@ const JobOrderTable: React.FC<JobOrderTableProps> = ({jobs, isLoading}) => {
   );
 };
 
-export default JobOrderTable;
+export default JobTableCustomerPage;

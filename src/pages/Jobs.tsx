@@ -1,13 +1,14 @@
-import { faCirclePlus, faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons"
+import { faCirclePlus, faFilter, faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Col, Container, Form, Row, Spinner } from "react-bootstrap"
 import { useAuth } from "../AuthContext"
 import toast from "react-hot-toast"
-import JobOrderTable from "../components/JobTable"
+import JobOrderTable from "../components/JobOrderTable"
 import { Show } from "../utils/ConditionalRendering"
 import { Link } from "react-router"
+import { JobStatusEnum } from "../components/AddJobOrderForm"
 
 
 const Jobs = () => {
@@ -16,6 +17,8 @@ const Jobs = () => {
 
   const [jobs, setJobs] = useState<JobDocument[]>([]);
   const [keyword, setKeyword] = useState("");
+  const [sStatus, setSStatus] = useState<JobStatusEnum | string>("")
+  const [jobDate, setJobDate] = useState("")
   const [page, setPage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
@@ -58,7 +61,7 @@ const Jobs = () => {
     handleGetJobs();
   },[])
 
-
+  // Handle search
   useEffect(() => {
     if (keyword.trim() !== '') {
       setIsLoading(true)
@@ -70,13 +73,41 @@ const Jobs = () => {
         
       }, 1000)
   
-      // Clear the timer if searchTerm changes before 2 seconds
       return () => clearTimeout(timer)
     } else  {
       setIsLoading(true)
       handleGetJobs();
     }
   }, [keyword])
+
+
+  // Handle status filter
+  useEffect(() => {
+    if ((sStatus as string ).trim()!== '') {
+      setIsLoading(true)
+      setJobs([])
+
+      handleGetJobs("", sStatus as string )
+
+    } else  {
+      setIsLoading(true)
+      handleGetJobs();
+    }
+  }, [sStatus])
+
+  // Handle date filter
+  useEffect(() => {
+    if (jobDate.trim() !== '') {
+      setIsLoading(true)
+      setJobs([])
+
+      handleGetJobs("", jobDate)
+
+    } else  {
+      setIsLoading(true)
+      handleGetJobs();
+    }
+  }, [jobDate])
 
   // useEffect(()=>{
   //   console.log(jobs)
@@ -93,7 +124,7 @@ const Jobs = () => {
       </Link>
     
       <Row>
-        <Col>
+        <Col xs={5}>
           <Form.Group  className="mb-2" controlId="name" style={{ position: 'relative' }}>
             <Form.Control
               className="p-1 px-2 border-1 rounded-2 border-dark bg-light"
@@ -105,7 +136,39 @@ const Jobs = () => {
             />
           </Form.Group>
         </Col>
-        <Col>
+        <Col xs={7}>
+          <div className="d-flex align-items-center justify-content-end gap-3">
+            <Form.Group className="mb-3 d-flex align-items-center gap-2 align-self-center" controlId="sStatus">
+              <Form.Label className="mb-0 fw-bold"><FontAwesomeIcon icon={faFilter} /> Status:</Form.Label>
+              <Form.Select
+                  size="sm"
+                  className="px-1 border-1 rounded-0 border-dark bg-light"
+                  style={{width: "10rem"}}
+                  required
+                  onChange={(e) => setSStatus(e.target.value as JobStatusEnum)}
+                  value={sStatus as string}
+              >
+                  <option selected value=""></option>
+                  {Object.values(JobStatusEnum).map((status) => (
+                      <option key={status} value={status}>
+                          {status}
+                      </option>
+                  ))}
+              </Form.Select>
+            </Form.Group>
+            {/* <Form.Group className="mb-3 d-flex align-items-center gap-2" controlId="sStatus">
+              <Form.Label className="mb-0 fw-bold text-nowrap"><FontAwesomeIcon icon={faFilter} /> Specific Date:</Form.Label>
+              <Form.Control
+                  type="date"
+                  size="sm"
+                  className="px-1 border-1 rounded-0 border-dark bg-light"
+                  required
+                  onChange={(e) => setJobDate(e.target.value as JobStatusEnum)}
+                  value={jobDate}
+              >
+              </Form.Control>
+            </Form.Group> */}
+          </div>
         </Col>
       </Row>
       

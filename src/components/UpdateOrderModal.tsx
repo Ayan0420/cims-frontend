@@ -96,9 +96,14 @@ const UpdateOrderModal: React.FC<UpdateOrderModalProps> = ({ jobDetails, getJobD
             console.log(response.data);
 
             navigate(`/jobs/${response.data._id}`);
+            
+            // setTimeout(()=>{
+            //     toast.success("Job Order Updates saved successfully!", { duration: 5000 });
+            //     setIsLoading(false);
+            //     handleClose();
+            // }, 2000)
 
             toast.success("Job Order Updates saved successfully!", { duration: 5000 });
-
             setIsLoading(false);
             handleClose();
         } catch (error) {

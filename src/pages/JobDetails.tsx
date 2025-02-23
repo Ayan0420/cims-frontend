@@ -2,15 +2,19 @@ import { faArrowAltCircleLeft, faComment, faEye, faFileInvoiceDollar, faPenToSqu
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useEffect, useState } from "react"
 import { Button, Col, Container, Row } from "react-bootstrap"
-import { Link, useParams } from "react-router"
+import { Link, useParams, useSearchParams } from "react-router"
 import { useAuth } from "../AuthContext"
 import { JobDocument } from "./Jobs"
 import axios from "axios"
 import moment from "moment"
 import UpdateOrderModal from "../components/UpdateOrderModal"
+import { Show } from "../utils/ConditionalRendering"
+import LoadingOverlay from "../components/LoadingOverlay"
 
 const JobDetails = () => {
     const { id } = useParams();
+    const [ searchParams ] = useSearchParams();
+
     const { token } = useAuth();
     
     const [jobDetails, setJobDetails] = useState<JobDocument | null>(null);
@@ -38,7 +42,11 @@ const JobDetails = () => {
     }
 
     useEffect(() => {
-
+        
+      // setIsLoading(true);
+      //   setTimeout(() => {
+      //     getJobDetails();
+      //   }, 2000)
         getJobDetails();
 
     }, []);
@@ -54,12 +62,16 @@ const JobDetails = () => {
     }
 
   return (
+    <div className="position-relative min-vh-100">
+    <Show when={isLoading}>
+      <LoadingOverlay message="Loading Job Details..."/>
+    </Show>
     <Container fluid className="job-details">
       <h1 className='border-bottom pb-2 pt-3 text-danger sticky-top bg-white d-flex align-items-center gap-2'><FontAwesomeIcon icon={faScrewdriverWrench} className='fs-1'/> 
         Job Order {jobDetails?.jobOrderNum}
       </h1>
       <div className="d-flex justify-content-between">
-        <Link to='/jobs'>
+        <Link to={searchParams.get('prev') ? searchParams.get('prev') as string: '/jobs'}>
           <Button size="sm" variant='secondary mt-2 mb-2' >
             <FontAwesomeIcon icon={faArrowAltCircleLeft} />  Go back
           </Button>
@@ -91,7 +103,7 @@ const JobDetails = () => {
       {/* Customer Information */}
       <section className="p-3">
         <Row className=''>
-          <h5 className=''><FontAwesomeIcon icon={faUser} /> Customer Information: <Button size="sm" variant="outline-info"><FontAwesomeIcon icon={faEye} /> View Customer</Button></h5>
+          <h5 className=''><FontAwesomeIcon icon={faUser} /> Customer Information: <Link to={`/customers/${jobDetails?.customerId._id}?prev=${jobDetails?._id}`}><Button size="sm" variant="outline-info"><FontAwesomeIcon icon={faEye} /> View Customer</Button></Link></h5>
         </Row>
         <Row>
           
@@ -179,10 +191,18 @@ const JobDetails = () => {
             <strong>Payment Method:</strong>  <span>{jobDetails?.sPayMeth}</span>
           </Col>
           <Col className="border-top border-start border-bottom py-2">
-            <strong>Service Charge:</strong>  <span className="fs-5">₱{numberToComma(jobDetails?.sCharge)}</span>
+            <strong>Service Charge:</strong>  <span className="fs-5">₱{
+              jobDetails?.sCharge ?
+              numberToComma(jobDetails?.sCharge) :
+              0
+            }</span>
           </Col>
           <Col className="border-top border-start border-bottom py-2">
-            <strong>Amount Paid:</strong>  <span className="fs-5">₱{numberToComma(jobDetails?.sDownPayment)}</span>
+            <strong>Amount Paid:</strong>  <span className="fs-5">₱{
+              jobDetails?.sDownPayment ?
+              numberToComma(jobDetails?.sDownPayment) :
+              0
+            }</span>
           </Col>
           <Col className="border py-2">
             <strong>Payment Balance:</strong>  <span className={
@@ -221,6 +241,7 @@ const JobDetails = () => {
 
       
     </Container>
+    </div>
   )
 }
 

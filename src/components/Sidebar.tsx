@@ -27,13 +27,13 @@ const Sidebar = () => {
                 <Link className='sidebar-nav text-light mb-1 rounded-1 d-flex align-items-center gap-3' to='/' >
                     <FontAwesomeIcon icon={faGauge} className='fs-4'/><span>Dashboard</span>
                 </Link>
-                <Link className='sidebar-nav text-light mb-1 rounded-1 d-flex align-items-center gap-3' to='jobs' >
+                <Link className='sidebar-nav text-light mb-1 rounded-1 d-flex align-items-center gap-3' to='/jobs' >
                     <FontAwesomeIcon icon={faScrewdriverWrench} className='fs-4'/><span>Jobs</span>
                 </Link>
-                <Link className='sidebar-nav text-light mb-1 rounded-1 d-flex align-items-center gap-3' to='jobs' >
+                <Link className='sidebar-nav text-light mb-1 rounded-1 d-flex align-items-center gap-3' to='/customers' >
                     <FontAwesomeIcon icon={faUsers} className='fs-4'/><span>Customers</span>
                 </Link>
-                <Link className='sidebar-nav text-light mb-1 rounded-1 d-flex align-items-center gap-3' to='jobs' >
+                <Link className='sidebar-nav text-light mb-1 rounded-1 d-flex align-items-center gap-3' to='/' >
                     <FontAwesomeIcon icon={faChartLine} className='fs-4'/><span>Analytics</span>
                 </Link>
                 
