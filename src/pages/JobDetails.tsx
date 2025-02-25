@@ -1,4 +1,4 @@
-import { faArrowAltCircleLeft, faComment, faEye, faFileInvoiceDollar, faPenToSquare, faPrint, faScrewdriver, faScrewdriverWrench, faUser } from "@fortawesome/free-solid-svg-icons"
+import { faArrowAltCircleLeft, faComment, faEye, faFileInvoiceDollar, faPrint, faScrewdriver, faScrewdriverWrench, faUser } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useEffect, useState } from "react"
 import { Button, Col, Container, Row } from "react-bootstrap"
@@ -41,6 +41,13 @@ const JobDetails = () => {
         }
     }
 
+    function handlePrintJobOrder(){
+       
+      (window as any).open(`${import.meta.env.VITE_API_URL}/report-generator/${id}`, '_blank').focus();
+        
+          
+    }
+
     useEffect(() => {
         
       // setIsLoading(true);
@@ -78,7 +85,7 @@ const JobDetails = () => {
         </Link>
         <div className="d-flex gap-2">
           {jobDetails && <UpdateOrderModal jobDetails={jobDetails} getJobDetails={getJobDetails}/>  }
-          <Button size="sm" variant="info align-self-center">
+          <Button size="sm" variant="info align-self-center" onClick={handlePrintJobOrder}>
             <FontAwesomeIcon icon={faPrint} /> Print
           </Button>
         </div>

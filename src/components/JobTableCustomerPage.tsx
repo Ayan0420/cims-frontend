@@ -2,7 +2,7 @@ import { Spinner, Table } from "react-bootstrap";
 import { JobDocument } from "../pages/Jobs";
 import { Show } from "../utils/ConditionalRendering";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faSearchMinus } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router";
 
 interface JobOrderTableProps {

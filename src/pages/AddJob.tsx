@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import AddJobOrderForm from '../components/AddJobOrderForm'
 import AddCustomerForm from '../components/AddCustomerForm'
@@ -79,7 +79,7 @@ const AddJob = () => {
               <h4 className='text-center mb-3'>Select a Customer</h4>
               <Row className='d-flex align-items-center justify-content-center flex-column gap-2'>
                 <Col className='shrink text-center'>
-                  <Button variant='success' onClick={e => setIsAddingCus(!isAddingCus)}>
+                  <Button variant='success' onClick={() => setIsAddingCus(!isAddingCus)}>
                     <FontAwesomeIcon icon={faPlus} /> Add New Customer
                   </Button>
                 </Col>
@@ -126,7 +126,7 @@ const AddJob = () => {
 
                           <Show when={searchResults.length > 0 && !isSearching}>
                             <ListGroup variant="flush">
-                              {searchResults.map((customer: any) => (
+                              {searchResults.map((customer: CustomerDocument) => (
                                 <ListGroup.Item key={customer._id} onClick={() => selectCustomer(customer)} className='search-result'>
                                   {customer.cusName} | {customer.cusAddress}
                                 </ListGroup.Item>

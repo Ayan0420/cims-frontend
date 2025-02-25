@@ -2,7 +2,7 @@ import { Pagination, Spinner, Table } from "react-bootstrap";
 import { JobDocument } from "../pages/Jobs";
 import { Show } from "../utils/ConditionalRendering";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight, faSearch, faSearchMinus } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";

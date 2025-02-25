@@ -2,11 +2,11 @@ import { faCirclePlus, faFilter, faScrewdriverWrench } from "@fortawesome/free-s
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Col, Container, Form, Row, Spinner } from "react-bootstrap"
+import { Col, Container, Form, Row } from "react-bootstrap"
 import { useAuth } from "../AuthContext"
 import toast from "react-hot-toast"
 import JobOrderTable from "../components/JobOrderTable"
-import { Show } from "../utils/ConditionalRendering"
+// import { Show } from "../utils/ConditionalRendering"
 import { Link } from "react-router"
 import { JobStatusEnum } from "../components/AddJobOrderForm"
 
@@ -18,8 +18,8 @@ const Jobs = () => {
   const [jobs, setJobs] = useState<JobDocument[]>([]);
   const [keyword, setKeyword] = useState("");
   const [sStatus, setSStatus] = useState<JobStatusEnum | string>("")
-  const [jobDate, setJobDate] = useState("")
-  const [page, setPage] = useState("")
+  // const [jobDate, setJobDate] = useState("")
+  // const [page, setPage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
   const fetchUrl = `${import.meta.env.VITE_API_URL}/api/jobs`
@@ -97,18 +97,18 @@ const Jobs = () => {
   }, [sStatus])
 
   // Handle date filter
-  useEffect(() => {
-    if (jobDate.trim() !== '') {
-      setIsLoading(true)
-      setJobs([])
+  // useEffect(() => {
+  //   if (jobDate.trim() !== '') {
+  //     setIsLoading(true)
+  //     setJobs([])
 
-      handleGetJobs("", jobDate)
+  //     handleGetJobs("", jobDate)
 
-    } else  {
-      setIsLoading(true)
-      handleGetJobs();
-    }
-  }, [jobDate])
+  //   } else  {
+  //     setIsLoading(true)
+  //     handleGetJobs();
+  //   }
+  // }, [jobDate])
 
   // useEffect(()=>{
   //   console.log(jobs)

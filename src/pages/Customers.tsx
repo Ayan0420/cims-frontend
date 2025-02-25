@@ -2,10 +2,10 @@ import { faCirclePlus, faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Col, Container, Form, Row, Spinner } from "react-bootstrap"
+import { Col, Container, Form, Row } from "react-bootstrap"
 import { useAuth } from "../AuthContext"
 import toast from "react-hot-toast"
-import { Show } from "../utils/ConditionalRendering"
+// import { Show } from "../utils/ConditionalRendering"
 import { Link } from "react-router"
 import { CustomerDocument } from "./AddJob"
 import CustomerTable from "../components/CustomerTable"
@@ -17,7 +17,7 @@ const Customers = () => {
 
   const [customers, setCustomers] = useState<CustomerDocument[]>([]);
   const [keyword, setKeyword] = useState("");
-  const [page, setPage] = useState("")
+  // const [page, setPage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
   const fetchUrl = `${import.meta.env.VITE_API_URL}/api/customers`

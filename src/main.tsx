@@ -12,6 +12,7 @@ import JobDetails from './pages/JobDetails.tsx';
 import Customers from './pages/Customers.tsx';
 import AddCustomer from './pages/AddCustomer.tsx';
 import CustomerDetails from './pages/CustomerDetails.tsx';
+import LegacyJoms from './pages/LegacyJoms.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -29,6 +30,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path='/customers' element={<Customers />} />
           <Route path='/customers/:id' element={<CustomerDetails />} />
           <Route path='/create-customer' element={<AddCustomer />} />
+          <Route path='legacy' element={<LegacyJoms />}/>
         </Route>
         <Route path='/login' element={<Login />}/>
       </Routes>

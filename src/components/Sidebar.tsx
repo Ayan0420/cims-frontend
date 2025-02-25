@@ -1,4 +1,4 @@
-import { Button, Image } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router';
 import { useAuth } from '../AuthContext';
 import toast from 'react-hot-toast';
@@ -35,10 +35,13 @@ const Sidebar = () => {
                 <Link className='sidebar-nav text-light mb-1 rounded-1 d-flex align-items-center gap-3' to='/' >
                     <FontAwesomeIcon icon={faChartLine} className='fs-4'/><span>Analytics</span>
                 </Link>
-                <a className='sidebar-nav text-light mb-1 rounded-1 d-flex align-items-center gap-3' target='_blank' href='./redirect-old-joms.html' >
+                <Link className='sidebar-nav text-light mb-1 rounded-1 d-flex align-items-center gap-3' to='/legacy' >
+                    <FontAwesomeIcon icon={faGears} className='fs-4'/><span>Old System</span>
+                </Link>
+                {/* <a className='sidebar-nav text-light mb-1 rounded-1 d-flex align-items-center gap-3' target='_blank' href='/redirect-old-joms.html' >
                     <FontAwesomeIcon icon={faGears} className='fs-4'/><span>Old System (Cloud ver.)</span>
-                </a>
-                
+                </a> */}
+                 
             </div>
             <div className='mt-auto text-center'>
                 <Button variant='warning fw-light px-5' size='sm' onClick={handleLogout}>Logout</Button>

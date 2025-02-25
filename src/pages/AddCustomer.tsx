@@ -1,4 +1,3 @@
-import React from 'react'
 import AddCustomerForm from '../components/AddCustomerForm'
 import { CustomerDocument } from './AddJob'
 import { Button, Container } from 'react-bootstrap'
